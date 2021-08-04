@@ -41,3 +41,6 @@ vignettes/*.pdf
 
 # RMD html
 *.html
+
+# mac crap
+.DS_Store
