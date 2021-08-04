@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Conversational CBR</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Layla Bouzoubaa" />
+    <script src="libs/header-attrs-2.7/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Conversational CBR
+## Foundations &amp; Research in CBR Seminar
+### Layla Bouzoubaa
+### Last Updated: 2021-08-04
+
+---
+
+
+
+
+# Objectives
+
+- Understand what a CCBR system is
+
+- Discover applications of CCBR
+
+- Identify knowledge containers
+
+- Discuss latest works
+
+
+---
+class: inverse center middle
+
+# What is CCBR?
+
+---
+## Conversational Case Base Reasoning
+
+&gt; CBR systems that interact with users in order to capture the problem in a
+conversation
+
+#### Typical Flow:
+
+- ask user for initial description of problem
+
+- system attempts to understand at least part of query
+
+- system uses partial match to continue dialogue with user
+
+- series of questions and answers ensue until the most useful case is selected to solve the user's problem
+
+???
+
+in most CBR systems, problem formation is the first step and prerequisite to remaining steps however in ccbr systems, the problem requires a series of steps, a dialogue, in order to formulate.
+
+steps: the interaction by asking users for an initial description of the problem. The system then attempts to utilize its understanding of such a description in order record a partial description of the query. It then uses this partial description to start a dialogue with the user. The dialogue typically consists of questions and answers. The system needs to find questions that will help determine the most useful case that will solve the user’s problem.
+---
+## IRL
+
+.pull-left[
+![:scale 50%](img/ew.png)
+]
+
+.pull-right[
+![:scale 50%](img/ew2.png)
+]
+
+
+---
+## Considerations
+
+.pull-left[
+
+- System Acceptance  
+  - explanation core of research = can system justify solution?
+  - CCBR must also explain the relevance of the results
+  
+- CCBR systems aim to reduce the amount of questions asked before a solution is reached
+
+- Balancing the accuracy and efficiency trade-off is important in fault diagnosis and classification problems
+]
+
+.pull-right[
+
+![](img/tradeoff.png)
+]
+
+???
+we know that in cbr systems, the ability to provide accurate and timely solutions is critical in building user's trust to a system. Additionally, the ability to explain its reasoning.
+
+one of the biggest benefits of CBR is that a systems conclusions can be justified from past experiences.
+However, CCBR systems are not only expected to explain the conclusions but also the relevance of test results from which conclusions are based
+
+balancing the trade-offs between accuracy and efficiency is an important challenge in CCBR- specifically in test selection. the absence of a specific goal or hypothesis makes it difficult to explain the relevance of questions the user is asked (i.e., why they are considered useful
+by the system)
+---
+## Charateristics
+
+.pull-left[
+
+- Test selection based on strategies  
+  - maximize information gain to better explain relevance of question asked by user
+  
+- Case bases are typically heterogeneous  
+  - different attributes are used to describe different cases
+
+- Irreducible  
+  - Unique solutions  
+  
+- Evaluated by precision &amp; recall 
+  - vs accuracy
+  
+- Description of the problem is not assumed to be available in advanced
+
+.footnote[*Conversational case-based reasoning in medical decision making]
+]
+
+.pull-right[
+
+![:scale 68%](img/interaction.png)
+
+]
+
+???
+test selection in CCBR is based on strategies so not having a specific goal or hypothesis makes it difficult to explain the relevance of questions that is asked by the user
+
+case bases are heterogeneous  = different cases have difference attributes ---&gt; in real world 
+but ideally you have questions that can be reused in a hierarchical structure
+
+irreducible = each case has a unique solution
+
+measures like precision (What proportion of positive identifications (TP + FP) was actually correct?) and recall aka sensitivity (What proportion of actual positives(TP + FN) was identified correctly?) are used to evaluate CCBR systems instead of accuracy for classification systems
+
+In contrast to traditional CBR approaches, a description of the problem to be solved is not assumed to be available in advance in CCBR. 
+---
+class: inverse center middle
+
+# CCBR Applications
+
+---
+## Speech Recognition
+
+### What is it?
+
+&gt; Speech recognition focuses on the translation of speech from a verbal format to a text one whereas voice recognition just seeks to identify an individual user’s voice &lt;sup&gt;1&lt;/sup&gt;
+
+&gt; Sensor data in time series play a major role in many applications. They are
+generalizations of static observations and often crucial for the diagnosis of faults and
+diseases....Speech by its very nature falls into this category because it produces signal data and
+happens in a temporal development &lt;sup&gt;2&lt;/sup&gt;
+
+.pull-left[
+
+- *Vocabulary* container = versatile
+
+- *Similarity*  
+  - Phonetic similarity   
+    - contains subjective elements
+  - Symbolic similarity  
+    - on the word level - symbols generated from feature level
+    - related to semantic issues
+
+.footnote[1.https://www.ibm.com/cloud/learn/speech-recognition]  
+]
+
+.pull-right[
+
+- *Adaptation*  
+  - Query: cleaning data to identify outliers  
+  - Solution: used to correct errors in the messages on a higher level as they cannot be detected on lower levels   
+
+
+- *Cases*  
+  - Contain feature vectors
+  - Contain words, phrases and sentences
+
+.footnote[2.Richter MM, Weber RO (2011) Case-based reasoning: a textbook. Springer. Berlin]
+]
+
+???
+vocabulary container in this kind of system is versatile as there are degrees of freedom when formulating an expression - meaning there are different ways to formulate an expression, which is good for minimizing recognition errors -  for example the usage of synonyms
+
+similarity: 
+The phonetic measure contains subjective elements like pronunciations.
+the symbolic measure is related to semantics - text is static while speech is nearly impossible to repeat
+
+adaptation: two kinds
+query: takes place regularly - step of cleaning data
+solution: takes place on the symbolic and the overall levels. The goal
+is to correct errors in the messages
+queries are spoken commands and solutions are symbolic commands that have to be performed
+
+cases:
+The feature vectors can be compared with a similarity measure. They denote actually occurring queries or solutions
+---
+class: inverse center middle
+
+# Knowledge Containers
+
+---
+## Vocabulary
+
+- The most important container  
+  - dictates the language used in the interactions between the user and the conversational system
+  
+- Can get as complex as converting user's language to the language of the case base  
+  - requires several additional transformations but allows for versatility and increased user acceptance
+
+
+???
+most important bc the conversation has to be conducted with the terms of the vocabulary container
+dictates the language used the entire interaction - from the the language used in the initial description to the language that the system will return in the dialogue
+
+
+---
+## Similarity 
+
+
+- Relative relevance of features must be established 
+
+- Concurrent alteration of weights
+
+
+???
+similar to other systems with a few distinctions: Relative relevance of features must be established as part of the similarity measure
+
+weights may have to be adjusted based on user feedback - for example, they only want to see solutions that do not include covid-19 tests (irl example)
+
+---
+## Adaptation
+
+- Adaptation rarely occurs as it may lead to solutions (i.e. products) that may not exist
+
+- In cases where modification is required, alternate values to specific features may be used
+
+- User frustration
+  - when no other answer would retrieve a valid case for a user
+  - a.k.a query failure
+  - can be amended by creating a new dialogue cycle to change one answer
+
+???
+It is not very common for a user to be offered a suitable solution and adaptation is required, however in some cases, if a user requests a modification, a way to proceed is by searching locally, from a reduced set of cases, for alternate values to specific features
+
+user frustration: 
+when the dialogue strategy recognizes that no other answer would retrieve a valid case for a user - this is also called "query failure". this can rectified by creating a new dialogue cycle to demonstrate to the user how many cases become available after one answer value is changed.
+---
+## Case Base
+
+- May use question-answer pairs rather than feature-value pairs
+
+- Heterogeneous collection of indices
+
+???
+as mentioned previously, one of the biggest distinctions is the inability to use the same
+questions throughout the entire case base. heterogeneous cases make for heterogeneous indexing therefore come with a different collections of indices from which to pull solutions as opposed to other CBR systems.
+---
+class: inverse center middle
+
+# Works
+
+---
+## Dialogue Management for CCBR
+
+.pull-left[
+
+- Key issues in dialogue management 
+  - conversational agents engage in spoken dialogues that are mixed-initiative
+  - human to human complexities like anaphora and ellipses
+  - requires solving two families of issues: speech proccessing and NLP
+
+- Known architectures
+  - graph-based
+  - slot-filling
+  - plan-based
+
+- Discourse Goal Stack Model (DGSM)  
+  - symmetry between goals that trigger CBR &amp; those that arise
+
+- RealDialog
+  - web-based conversational agent
+
+]
+
+.pull-right[
+
+![:scale 90%](img/dm_ccbr.png)
+]
+
+???
+Most works in CCBR have focused on minimizing the num of questions illicted to the user, giving users more control on which initiative is held by the system and enabling the system to answer why a question was asked and how it retrieved the solution.
+There are several more distinct issues with CCBR that this paper hopes to address.
+this paper presents a general architecture for CCBR called the Discourse Goal Stack Model (DGSM).
+
+Main objective: interact with humans in a 2-way natural language dialogue in persuit of creating conversational interfaces that can serve as the front-end to other, often complex, automated reasoning systems.
+Key issues:
+- conversational agents engage in spoken dialogues that are mixed-initiative meaning either the human or the system can have control of the dialogue at a particular turn. this inserts the complexities of human-human dialogue like the use of anaphora (use of things like pronouns - depend on context) and ellipses (using phrases that leave off key components that are implied)
+- requires solving two big issues: speech processing and nlp
+
+known architectures:
+1. graph: graph-based architectures employ finite machines to guide all interactions. the advantage is well-structured dialogues whose interaction can be anticipated in advance.
+
+2. slot: employ a feature vector with values to be determined during the course of the conversation
+
+3. plan: most general. employs a planner to create domain-specific plans to solve the user's problem
+
+DGSM:
+the core of this architecture is handling the each of the essential ccbr tasks as discourse goals (selecting cases, elicting case descriptions, and responding to requests).it is consistent with the standard CCBR model in assuming that each case is specified by a unique set of
+attribute/value pairs. 
+the goals are addressed through a goal stack that (1) all dialogue goals handled uniformly and (2) handles interruptions and subgoals, even when nested to arbitrary depth
+
+builds on the observation that there is a symmetry between the discourse goals that trigger CBR and the discourse goals that arise in CBR when the facts of a problem description are being elicited
+
+realdialog:
+implementation of DGSM: realdialog - web-based conversational agent for customer relationship management Users type queries into a text eld, and answers are displayed in a conversation area. behind the scenes: tokenizes users input (spell-correction and interpretation of apostrophes), development of a parse-tree (result of tokenization, part of speech tagging, and parsing) however what theyve found is that it often requires reference resolution.
+---
+## References
+
+
+
+- 
+&lt;p&gt;&lt;cite&gt;McSherry, D.
+(2011).
+&amp;ldquo;Conversational case-based reasoning in medical decision making&amp;rdquo;.
+In: &lt;em&gt;Artificial Intelligence in Medicine&lt;/em&gt; 52.2. Artificial Intelligence in Medicine AIME 2009, pp. 59-66.
+ISSN: 0933-3657.
+DOI: &lt;a href="https://doi.org/https://doi.org/10.1016/j.artmed.2011.04.007"&gt;https://doi.org/10.1016/j.artmed.2011.04.007&lt;/a&gt;.
+URL: &lt;a href="https://www.sciencedirect.com/science/article/pii/S0933365711000480"&gt;https://www.sciencedirect.com/science/article/pii/S0933365711000480&lt;/a&gt;.&lt;/cite&gt;&lt;/p&gt;
+
+- Richter M.M., Weber R.O. (2013) Conversational CBR. In: Case-Based Reasoning. Springer, Berlin, Heidelberg. https://doi.org/10.1007/978-3-642-40167-1_20
+
+- Gu, M., Aamodt, A.: Dialog learning in conversational cbr. In: Proceedings ofthe 19th International Florida Artificial Intelligence Research Society Conference,Florida, USA, AAAI Press (2006) 358–363 
+
+- Branting K., Lester J., Mott B. (2004) Dialogue Management for Conversational Case-Based Reasoning. In: Funk P., González Calero P.A. (eds) Advances in Case-Based Reasoning. ECCBR 2004. Lecture Notes in Computer Science, vol 3155. Springer, Berlin, Heidelberg. https://doi.org/10.1007/978-3-540-28631-8_7
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="assets/macros.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%",
+"highlightStyle": "github",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

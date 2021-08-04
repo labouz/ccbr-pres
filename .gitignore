@@ -40,7 +40,7 @@ vignettes/*.pdf
 .Renviron
 
 # RMD html
-*.html
+
 
 # mac crap
 .DS_Store
