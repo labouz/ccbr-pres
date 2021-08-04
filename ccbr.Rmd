@@ -1,0 +1,108 @@
+---
+title: "Conversational CBR"
+subtitle: "Foundations & Research in CBR Seminar"
+author: "Layla Bouzoubaa (@bouzoulay)"
+date: "Last Updated: `r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      slideNumberFormat: "%current%"
+      highlightStyle: github
+      highlightLines: true
+      ratio: 16:9
+      countIncrementalSlides: true
+---
+
+```{r xaringan-themer, include = FALSE}
+library(xaringanthemer)
+style_mono_light(
+  base_color = "#3092FF",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i"),
+  code_font_google   = google_font("Droid Mono"),
+)
+```
+
+# Objectives
+
+- Understand what a CCBR system is
+
+- Discover applications of CCBR
+
+- Identify knowledge containers
+
+- Discuss latest works
+
+
+---
+class: inverse center middle
+
+# What is CCBR?
+
+---
+## Conversational Case Base Reasoning
+
+
+---
+class: inverse center middle
+
+# CCBR Applications
+
+---
+## Speech Recognition
+
+### What is it?
+
+> Speech recognition focuses on the translation of speech from a verbal format to a text one whereas voice recognition just seeks to identify an individual user’s voice^1^
+
+> Sensor data in time series play a major role in many applications. They are
+generalizations of static observations and often crucial for the diagnosis of faults and
+diseases....Speech by its very nature falls into this category because it produces signal data and
+happens in a temporal development^2^
+
+.pull-left[
+
+- *Vocabulary* container = versatile
+
+- *Similarity*  
+  - Phonetic similarity   
+    - contains subjective elements
+  - Symbolic similarity  
+    - on the word level - symbols generated from feature level
+    - related to semantic issues
+    
+.footnote[1.https://www.ibm.com/cloud/learn/speech-recognition]
+.footnote[2.Richter MM, Weber RO (2011) Case-based reasoning: a textbook. Springer. Berlin]
+]
+
+.pull-right[
+
+- *Adaptation*  
+  - Query: cleaning data to identify outliers  
+  - Solution: used to correct errors in the messages on a higher level as they cannot be detected on lower levels   
+
+
+- *Cases*  
+  - Contain feature vectors
+  - Contain words, phrases and sentences
+
+]
+
+???
+vocabulary container in this kind of system is versatile as there are degrees of freedom when formulating an expression - meaning there are different ways to formulate an expression, which is good for minimizing recognition errors -  for example the usage of synonyms
+
+similarity: 
+The phonetic measure contains subjective elements like pronunciations.
+the symbolic measure is related to semantics - text is static while speech is nearly impossible to repeat
+
+adaptation: two kinds
+query: takes place regularly - step of cleaning data
+solution: takes place on the symbolic and the overall levels. The goal
+is to correct errors in the messages
+queries are spoken commands and solutions are symbolic commands that have to be performed
+
+cases:
+The feature vectors can be compared with a similarity measure. They denote actually occurring queries or solutions
+---
